@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Conversation{% endblock %}
+
+{% block content %}
+
+<style>
+    #messageArea {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: scroll;
+        height: 500px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    .chat-message {
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Conversation</h2>
+            <div 
+                id="messageArea" 
+                class="mb-3" 
+                style="height: 500px; overflow-y: scroll; background-color: #f8f9fa; border: 1px solid #ccc; padding: 10px;">
+                {% for question, answer in conversation.items()|reverse %}
+                    <div class="chat-message">
+                        <strong>Question:</strong> {{ question }}<br>
+                        <strong>Answer:</strong> {{ answer }}<br><br>
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="POST">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="answer" 
+                        id="answer" 
+                        class="form-control" 
+                        placeholder="Type your answer here..." 
+                        onkeypress="handleKeyPress(event)">
+                    <div class="input-group-append">
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary">Send
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+ 
